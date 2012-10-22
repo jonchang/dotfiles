@@ -1,0 +1,9 @@
+OPTIONS=color,hilite_pet,lit_corridor,DECgraphics,boulder:8
+OPTIONS=showexp,showscore,time
+OPTIONS=msg_window=c,disclose:+iagcv
+
+OPTIONS=autodig,autopickup,pickup_types:$!/="?
+OPTIONS=catname:Hamburglar,dogname:Ronald,fruit:cheese pizza
+OPTIONS=scores:10 top/3 around/own
+
+OPTIONS=!cmdassist,!help,!legacy,!news,suppress_alert:3.4.3
