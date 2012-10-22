@@ -1,0 +1,8 @@
+## .profile
+
+. "$HOME/.dotfilesrc"
+. "$DOTFILES_ROOT_DIR/shell/autoload"
+
+export PATH
+
+# vim: ft=sh

@@ -1,0 +1,13 @@
+alias R="$(/usr/bin/which R) --no-save"
+
+case "$OSTYPE" in
+    *darwin*)
+        alias top="top -o cpu"
+        alias ls='ls -Gp'
+        ;;
+    *linux*)
+        alias ls='ls --color'
+        ;;
+esac
+
+# vim: ft=sh

@@ -1,0 +1,122 @@
+" Make things work
+set nocompatible
+
+" Windows compat
+if has('win32') || has('win64')
+    source $VIMRUNTIME/vimrc_example.vim
+    source $VIMRUNTIME/mswin.vim
+    behave mswin
+endif
+
+" Syntax highlighting
+if has('syntax') && (&t_Co > 2 || has('win32') || has('gui_running'))
+    syntax on
+
+    if &term == "xterm-256color"
+        set t_Co=256
+    endif
+endif
+
+set encoding=utf-8
+set lazyredraw
+set showmode
+set scrolloff=4
+" Use desert for console vim, gvim color theme is chosen later
+colorscheme desert
+
+" Ruler
+if has('cmdline_info')
+    set ruler
+    set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%)
+    set showcmd
+endif
+
+" Status line
+if has('statusline')
+    set laststatus=2
+    set statusline=%<%f\ %=\:\b%n\[%{strlen(&ft)?&ft:'none'}/%{&encoding}/%{&fileformat}]%m%r%w\ %l,%c%V\ %P
+endif
+
+set wildmode=list:longest,full
+filetype on
+set autoindent
+set shiftwidth=4
+set softtabstop=4
+set tabstop=4
+set smarttab
+set expandtab
+set smartindent
+set wildignore=*.pyc,*.o,*.obj,*.swp
+
+" Fix search
+nnoremap / /\v
+vnoremap / /\v
+set ignorecase
+set smartcase
+set incsearch
+set showmatch
+set hlsearch
+
+" Long line support
+set wrap
+set textwidth=79
+set formatoptions=qrn1
+
+if has('gui_running')
+    set guioptions-=T          " remove the toolbar
+    if has("mac")
+        set guifont=Monaco:h12
+    elseif has("unix")
+        set guifont=Monospace\ 12
+    elseif has("win32") || has("win64")
+        set guifont=Consolas:h11:cANSI
+    endif
+    try
+        colorscheme phd
+    catch
+        try
+            colorscheme twilight
+        catch
+        endtry
+    endtry
+endif
+
+if has('win32') || has ('win64')
+    silent execute '!mkdir $HOMEDRIVE$HOMEPATH/.vimbackup'
+    set directory=$TEMP//,$TMP//,.
+    set backupdir=$HOMEDRIVE$HOMEPATH/.vimbackup//,.
+elseif has('unix') || has('mac')
+    if filewritable(expand('~/.vimtmp'))
+       "
+    else
+        silent execute '!mkdir ~/.vimtmp'
+        silent execute '!mkdir ~/.vimbackup'
+        set directory=~/.vimtmp//,.
+        set backupdir=~/.vimbackup//,.
+    endif
+endif
+
+au! BufRead,BufNewFile *.json setfiletype json 
+autocmd FileType python call <SID>pystuff()
+function <SID>pystuff()
+    set foldmethod=indent
+    set foldlevel=99999
+    set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class,with
+endfunction
+
+set columns=80
+set listchars=tab:▸\ ,trail:~
+set list
+set ffs=unix,dos,mac " Automatically open stupid mac files
+
+" Cripple yourself
+nnoremap <up> <nop>
+nnoremap <down> <nop>
+nnoremap <left> <nop>
+nnoremap <right> <nop>
+inoremap <up> <nop>
+inoremap <down> <nop>
+inoremap <left> <nop>
+inoremap <right> <nop>
+nnoremap j gj
+nnoremap k gk

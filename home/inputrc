@@ -1,0 +1,28 @@
+# unicode input
+set meta-flag on
+set input-meta on
+set output-meta on
+set convert-meta off
+
+# useful with XDG/MacOSX folders
+set completion-ignore-case on
+#set show-all-if-ambiguous
+
+# Control+left/right
+"\e[1;5D": backward-word
+"\e[1;5C": forward-word
+
+# Option+left/right
+"\e[1;3D": backward-word
+"\e[1;3C": forward-word
+
+# Control+left/right on Terminal.app
+"\e[5D": beginning-of-line
+"\e[5C": end-of-line
+
+# Option+left/right on Terminal.app
+"\ef": forward-word
+"\eb": backward-word
+
+"\e033b": forward-word
+"\e033f": backward-word

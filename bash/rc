@@ -1,0 +1,20 @@
+## bashrc, called for interactive shells
+
+[[ -z "$DOTFILES_ROOT_DIR" ]] && source "$HOME/.dotfilesrc"
+
+source $DOTFILES_BASH_DIR/prompt
+source $DOTFILES_BASH_DIR/term_title
+source $DOTFILES_BASH_DIR/completion
+
+#PROMPT_COMMAND="set_term_title;"
+
+# Make bash check its window size after a process completes
+shopt -s checkwinsize
+
+# easy on spelling mistakes
+shopt -s cdspell
+
+# turn off distractive bells
+set bell-style none
+
+# vim: ft=sh

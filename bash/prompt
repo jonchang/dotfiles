@@ -1,0 +1,8 @@
+RED="\[\033[1;31m\]"
+YELLOW="\[\033[1;33m\]"
+GREEN="\[\033[1;32m\]"
+NORMAL="\[\033[0m\]"
+
+PS1="\n$GREEN\u@\h $YELLOW\w$NORMAL\n\$ "
+
+# vim: ft=sh

@@ -1,0 +1,2 @@
+export EDITOR=`/usr/bin/which vim`
+export VISUAL=$EDITOR

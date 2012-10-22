@@ -1,0 +1,6 @@
+options(repos=c("http://cran.stat.ucla.edu/", "http://cran.cnr.berkeley.edu"))
+options(max.print=2000)
+options(menu.graphics=FALSE)
+library(Defaults)
+#setDefaults(q, save="no")
+library(colorout)
