@@ -1,4 +1,7 @@
 .DS_Store
+.AppleDouble
+.LSOverride
+Icon
 
 # Thumbnails
 ._*
@@ -11,3 +14,4 @@
 .*.sw[a-z]
 *.un~
 Session.vim
+.netrwhist
