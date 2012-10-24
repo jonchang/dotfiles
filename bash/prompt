@@ -1,8 +1,126 @@
-RED="\[\033[1;31m\]"
-YELLOW="\[\033[1;33m\]"
-GREEN="\[\033[1;32m\]"
-NORMAL="\[\033[0m\]"
+# truncates a string on the left
+# $1: string to truncate
+# $2: maximum length
+# $3: truncation string replacement (optional)
+# $4: separator symbol (optional, prevents truncation of rightmost item)
+__truncate_left() {
+    local str="$1"
+    local maxlen="$2"
+    local trunc_symbol="$3"
+    local sep_symbol="$4"
 
-PS1="\n$GREEN\u@\h $YELLOW\w$NORMAL\n\$ "
+    # get minimum length to not truncate a long name
+    if [ -n "$sep_symbol" ]
+    then
+        local component=${1##*$sep_symbol}
+        maxlen=$(( ( maxlen < ${#component} ) ? ${#component} : maxlen ))
+    fi
+
+    # truncation point
+    local offset=$(( ${#str} - maxlen ))
+
+    if [ ${offset} -gt "0" ]
+    then
+        #truncation is needed
+        str=${str:$offset:$maxlen} #truncate
+        str=${trunc_symbol}/${str#*/} #add symbol
+    fi
+    echo "$str"
+}
+
+# truncates a path
+__truncate_path() {
+    #gain some place with '~'
+    local path=${1/#$HOME/\~}
+    __truncate_left "$path" 25 '…' '/'
+}
+
+# truncates CWD
+__tpwd() {
+    __truncate_path "$PWD"
+}
+
+# clears a line that was not terminated by a LF
+# fixing the dangling prompt issue
+# marks it with a reverse %, like zsh
+clear_incomplete_line() {
+    # ask for cursor position
+    echo -en "\033[6n"
+    # read answer
+    IFS=';' read -r -d R -a pos
+    # extract tput-compatible answer
+    local row=$((${pos[0]:2} - 1))
+    local col=$((${pos[1]} - 1))
+    # move back over terminal answer echo, which will hopefully be overwritten
+    tput cup $row $col
+
+    # not on first column? clean up! (overwrites answer)
+    # we print a terminal width worth of columns, but since
+    # it goes too far, we backtrack with CR
+    [[ $col != 0 ]] && printf "\e[7m%%\e[m%*s\r" $((COLUMNS-1))
+    # else e.g prompt will overwrite answer echo
+}
+
+# git prompt info
+source $DOTFILES_BASH_DIR/git_prompt_info
+GIT_PS1_SHOWDIRTYSTATE=1
+GIT_PS1_SHOWSTASHSTATE=1
+GIT_PS1_SHOWUNTRACKEDFILES=1
+
+# dynamic prompt
+set_prompt() {
+    # save last command exit code (requires set_prompt to be first in PROMPT_COMMAND)
+    local last_exit_code="$?"
+
+    # load color vars
+    source "$DOTFILES_BASH_DIR/ansi_colors"
+
+    # set up git status env vars
+    __git_ps1_vars
+
+    # build prompt
+    PS1=""
+
+    # opening + user@host
+    PS1+="${B}[${UC}\u@\h"
+
+    # git?
+    if [[ -n "${GIT_PS1_NAME-}" ]]; then
+        # basic info
+        PS1+=" ${Y}${GIT_PS1_NAME}"
+        [[ "$GIT_PS1_STATUS" == *b* ]] && PS1+="${NONE}›"
+        PS1+="${NONE}›${B}${GIT_PS1_BRANCH}"
+        [[ "$GIT_PS1_STATUS" == *g* ]] && PS1+="${NONE}›"
+        PS1+="${NONE}›${G}${GIT_PS1_PREFIX}"
+
+        # status symbols
+        local status=""
+        [[ "$GIT_PS1_STATUS" == *h* ]] && status+="${NONE}↰"
+        [[ "$GIT_PS1_STATUS" == *t* ]] && status+="${R}!"
+        [[ "$GIT_PS1_STATUS" == *u* ]] && status+="${Y}≠"
+        [[ "$GIT_PS1_STATUS" == *s* ]] && status+="${R}±"
+        [[ "$GIT_PS1_STATUS" == *n* ]] && status+="${BB}∅"
+        [[ -n "$status" ]] && PS1+=" ${status}"
+
+        # action info
+        local action=""
+        [[ "$GIT_PS1_STATUS" == *R* ]] && action+=" rebase"
+        [[ "$GIT_PS1_STATUS" == *i* ]] && action+="-i"
+        [[ "$GIT_PS1_STATUS" == *A* ]] && action+=" apply"
+        [[ "$GIT_PS1_STATUS" == *M* ]] && action+=" merge"
+        [[ "$GIT_PS1_STATUS" == *B* ]] && action+=" bisect"
+        [[ -n "$action" ]] && PS1+="${R}${action}"
+    else
+        # no git => just a smartly truncated path
+        PS1+=" ${G}$(__tpwd)"
+    fi
+
+    # exit code
+    [[ $last_exit_code -ne 0 ]] && PS1+=" ${BW}${last_exit_code}"
+
+    # closing prompt
+    PS1+="${B}]"
+    PS1+="${UC}\\$ ${NONE}"
+}
 
 # vim: ft=sh
