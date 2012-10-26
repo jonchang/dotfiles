@@ -82,7 +82,7 @@ set_prompt() {
     PS1=""
 
     # opening + user@host
-    PS1+="${B}[${UC}\u@\h"
+    PS1+="${BG}\u@\h"
 
     # git?
     if [[ -n "${GIT_PS1_NAME-}" ]]; then
@@ -112,15 +112,14 @@ set_prompt() {
         [[ -n "$action" ]] && PS1+="${R}${action}"
     else
         # no git => just a smartly truncated path
-        PS1+=" ${G}$(__tpwd)"
+        PS1+=" ${BB}$(__tpwd)"
     fi
 
     # exit code
     [[ $last_exit_code -ne 0 ]] && PS1+=" ${BW}${last_exit_code}"
 
     # closing prompt
-    PS1+="${B}]"
-    PS1+="${UC}\\$ ${NONE}"
+    PS1+="${UC}\n\\$ ${NONE}"
 }
 
 # vim: ft=sh
