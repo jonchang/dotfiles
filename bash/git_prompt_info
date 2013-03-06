@@ -107,7 +107,7 @@ __git_ps1_vars() {
 
     # find base dir (toplevel)
     [[ $bare -eq 1 ]] && toplevel="$g"
-    [[ $bare -eq 0 ]] && toplevel="$(dirname $g)"
+    [[ $bare -eq 0 ]] && toplevel="$(dirname \\"$g\\")"
 
     # find relative path within toplevel
     prefix="${PWD/#$toplevel/}"

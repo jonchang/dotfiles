@@ -1,12 +1,4 @@
-" Make things work
 set nocompatible
-
-" Windows compat
-if has('win32') || has('win64')
-    source $VIMRUNTIME/vimrc_example.vim
-    source $VIMRUNTIME/mswin.vim
-    behave mswin
-endif
 
 " Syntax highlighting
 if has('syntax') && (&t_Co > 2 || has('win32') || has('gui_running'))
@@ -59,7 +51,6 @@ set hlsearch
 
 " Long line support
 set wrap
-set textwidth=79
 set formatoptions=qrn1
 
 if has('gui_running')
@@ -81,11 +72,7 @@ if has('gui_running')
     endtry
 endif
 
-if has('win32') || has ('win64')
-    silent execute '!mkdir $HOMEDRIVE$HOMEPATH/.vimbackup'
-    set directory=$TEMP//,$TMP//,.
-    set backupdir=$HOMEDRIVE$HOMEPATH/.vimbackup//,.
-elseif has('unix') || has('mac')
+if has('unix') || has('mac')
     if filewritable(expand('~/.vimtmp'))
        "
     else
@@ -96,7 +83,7 @@ elseif has('unix') || has('mac')
     endif
 endif
 
-au! BufRead,BufNewFile *.json setfiletype json 
+au! BufRead,BufNewFile *.json setfiletype json
 autocmd FileType python call <SID>pystuff()
 function <SID>pystuff()
     set foldmethod=indent
@@ -104,7 +91,6 @@ function <SID>pystuff()
     set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class,with
 endfunction
 
-set columns=80
 set listchars=tab:▸\ ,trail:~
 set list
 set ffs=unix,dos,mac " Automatically open stupid mac files

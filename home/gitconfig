@@ -7,3 +7,6 @@
     ui = auto
 [color "diff"]
     whitespace = red reverse
+[user]
+	name = Jonathan Chang
+	email = jchang641@gmail.com
