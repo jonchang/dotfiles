@@ -72,16 +72,8 @@ if has('gui_running')
     endtry
 endif
 
-if has('unix') || has('mac')
-    if filewritable(expand('~/.vimtmp'))
-       "
-    else
-        silent execute '!mkdir ~/.vimtmp'
-        silent execute '!mkdir ~/.vimbackup'
-        set directory=~/.vimtmp//,.
-        set backupdir=~/.vimbackup//,.
-    endif
-endif
+set backupdir=~/.vim/backup/
+set directory=~/.vim/backup/
 
 au! BufRead,BufNewFile *.json setfiletype json
 autocmd FileType python call <SID>pystuff()
