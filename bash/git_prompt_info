@@ -1,6 +1,6 @@
 # extracted from git's bash completion contrib
 # don't redefine it if it's there already
-if [[ -z "$(type -t __gitdir)" ]]; then
+if [[ -z $BASH_VERSION || -z "$(type -t __gitdir)" ]]; then
     __gitdir ()
     {
         if [ -z "${1-}" ]; then
@@ -44,17 +44,27 @@ __git_ps1_branch() {
     local branch
     branch="$(git symbolic-ref HEAD 2>/dev/null)" || \
     branch="$(__git_ps1_describe)" || \
-    branch="$(git rev-parse --short HEAD)…" || \
+    branch="$(git rev-parse --short HEAD)" || \
     branch="unknown"
 
     echo ${branch##refs/heads/}
 }
 
-# compute git status and set environment variables
-__git_ps1_vars() {
+__git_ps1_gitdir() {
     local g="$(__gitdir)"
 
     # are we in a git repo?
+    if [[ -z "$g" ]]; then
+        unset GIT_PS1_GITDIR
+    else
+        GIT_PS1_GITDIR="$g"
+    fi
+}
+
+# compute git status and set environment variables
+__git_ps1_vars() {
+    local g="$GIT_PS1_GITDIR"
+
     if [[ -z "$g" ]]; then
         unset GIT_PS1_STATUS
         unset GIT_PS1_BRANCH
@@ -90,7 +100,7 @@ __git_ps1_vars() {
     [[ $gitdir -eq 0 && "true" = "$(git rev-parse --is-inside-work-tree 2>/dev/null)" ]] && work=1
 
     # gitdir corner case
-    [[ "$g" == '.' ]] && if [[ "$(basename "$PWD")" == ".git" ]]; then
+    [[ "$g" == '.' ]] && if [[ "${PWD##*/}" == ".git" ]]; then
         # inside .git: not a bare repository!
         # weird: --is-bare-repository returns true regardless
         bare=0
@@ -107,7 +117,7 @@ __git_ps1_vars() {
 
     # find base dir (toplevel)
     [[ $bare -eq 1 ]] && toplevel="$g"
-    [[ $bare -eq 0 ]] && toplevel="$(dirname \\"$g\\")"
+    [[ $bare -eq 0 ]] && toplevel="${g%/*}"
 
     # find relative path within toplevel
     prefix="${PWD/#$toplevel/}"
@@ -129,7 +139,7 @@ __git_ps1_vars() {
     # working directory status
     if [[ $work -eq 1 ]]; then
         ## dirtiness, if config allows it
-        if [[  -n "${GIT_PS1_SHOWDIRTYSTATE-}" && "$(git config --bool bash.showDirtyState)" != "false" ]]; then
+        if [[  -n "${GIT_PS1_SHOWDIRTYSTATE-}" ]]; then
             # unstaged files
             git diff --no-ext-diff --ignore-submodules --quiet --exit-code || unstaged=1
 
@@ -149,7 +159,7 @@ __git_ps1_vars() {
 
         ## untracked files
         if [[ -n "${GIT_PS1_SHOWUNTRACKEDFILES-}" ]]; then
-            [ -n "$(git ls-files --others --exclude-standard)" ] && untracked=1
+            [[ -n "$(git ls-files --others --exclude-standard)" ]] && untracked=1
         fi
     fi
 
@@ -171,7 +181,7 @@ __git_ps1_vars() {
     GIT_PS1_BRANCH="$branch"
     GIT_PS1_SUBJECT="$subject"
     GIT_PS1_TOPLEVEL="$toplevel"
-    GIT_PS1_NAME="$(basename "$toplevel")"
+    GIT_PS1_NAME="${toplevel##*/}"
     GIT_PS1_PREFIX="$prefix"
 }
 
