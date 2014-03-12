@@ -10,3 +10,5 @@
 [user]
 	name = Jonathan Chang
 	email = jchang641@gmail.com
+[push]
+	default = simple
