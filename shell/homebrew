@@ -12,3 +12,13 @@ PATH=$PATH:/usr/local/share/npm/bin
 # turn off homebrew emoji
 HOMEBREW_NO_EMOJI="you bet"
 export HOMEBREW_NO_EMOJI
+
+# linuxbrew?
+case "$OSTYPE" in
+    *linux*)
+        export PATH="$HOME/.linuxbrew/bin:$PATH"
+        export LD_LIBRARY_PATH="$HOME/.linuxbrew/lib:$LD_LIBRARY_PATH"
+        ;;
+esac
+
+export PATH
