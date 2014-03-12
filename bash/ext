@@ -1,0 +1,56 @@
+# Make Bash more like Zsh
+
+
+# Hooks
+# derived from http://glyf.livejournal.com/63106.html
+
+# default: NOOPs
+function preexec { :; }
+function precmd  { :; }
+function chpwd   { :; }
+
+__cd_invoke_chpwd() {
+    builtin cd $@
+    chpwd
+}
+
+__preexec_invoke_exec () {
+    local this_command;
+
+    [ -n "$COMP_LINE" ] && return  # completion
+    [ "$BASH_COMMAND" = "$PROMPT_COMMAND" ] && return  # precmd
+
+    this_command=`history 1 | sed -e "s/^[ ]*[0-9]*[ ]*//g"`;
+    preexec "$this_command"
+}
+
+# set up the hooks
+PROMPT_COMMAND="precmd"
+trap '__preexec_invoke_exec' DEBUG
+cd() { __cd_invoke_chpwd $@; }
+
+
+# clears a line that was not terminated by a LF fixing the dangling prompt
+# issue by marking it with a reversed %, like zsh
+clear_incomplete_line() {
+    local row
+    local col
+
+    # ask for cursor position then read answer
+    # TODO: fix read: mashing keyboard makes syntax errors
+    stty -echo
+    echo -en "\033[6n"
+    IFS=';' read -r -d R -a pos
+    stty echo
+
+    # extract tput-compatible answer
+    row=$(( ${pos[0]:2} - 1 ))
+    col=$(( ${pos[1]} - 1 ))
+
+    # not on first column? do clean up: fill with spaces and rag left
+    if [[ $col != 0 ]]; then
+        printf "\e[7m%%\e[m"
+        printf "%*s\r" $(( COLUMNS - $col ))
+    fi
+}
+
