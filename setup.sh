@@ -10,7 +10,7 @@ dotfile="$(basename "$file")"
             ;;
         *)
             # link the file with a leading dot
-            echo "linking ${dotfile}"
+            echo "ln -sf $(echo "$(pwd)/${file}" | sed "s:^$HOME:~:") ~/.${dotfile}"
             ln -sf "$(pwd)/${file}" "$HOME/.${dotfile}"
             ;;
     esac
