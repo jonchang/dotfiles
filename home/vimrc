@@ -83,6 +83,8 @@ function <SID>pystuff()
     set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class,with
 endfunction
 
+autocmd FileType make set noexpandtab
+
 set listchars=tab:▸\ ,trail:~
 set list
 set ffs=unix,dos,mac " Automatically open stupid mac files
