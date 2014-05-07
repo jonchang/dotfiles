@@ -2,13 +2,13 @@
     autosetuprebase = always
 [core]
     whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
-    excludesfile = ~/.gitignore_global
+    excludesfile = ~/.cvsignore
 [color]
     ui = auto
 [color "diff"]
     whitespace = red reverse
 [user]
-	name = Jonathan Chang
-	email = jchang641@gmail.com
+    name = Jonathan Chang
+    email = jchang641@gmail.com
 [push]
-	default = simple
+    default = simple
