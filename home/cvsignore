@@ -15,3 +15,6 @@ Icon
 *.un~
 Session.vim
 .netrwhist
+
+# tags
+tags
