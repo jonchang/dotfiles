@@ -1,5 +1,26 @@
 set nocompatible
 
+" Plugins with vundle
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'gmarik/Vundle.vim'
+Plugin 'pangloss/vim-javascript'
+
+" Snipmate
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
+Plugin 'honza/vim-snippets'
+
+" Colors
+Plugin 'phd'
+Plugin 'twilight'
+Plugin 'tpope/vim-vividchalk'
+
+call vundle#end()
+filetype plugin indent on
+
 " Syntax highlighting
 if has('syntax') && (&t_Co > 2 || has('win32') || has('gui_running'))
     syntax on
@@ -111,3 +132,4 @@ inoremap <left> <nop>
 inoremap <right> <nop>
 nnoremap j gj
 nnoremap k gk
+

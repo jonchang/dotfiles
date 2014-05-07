@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 [ $(pwd) = "$HOME/.dotfiles" ] || ln -sfn "$(pwd)" "$HOME/.dotfiles"
 
@@ -15,3 +15,7 @@ dotfile="$(basename "$file")"
             ;;
     esac
 done
+
+# vim stuff
+git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+vim +PluginInstall +qall
