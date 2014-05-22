@@ -13,6 +13,9 @@ Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
 
+" completion
+Plugin 'ervandew/supertab'
+
 " Colors
 Plugin 'phd'
 Plugin 'twilight'
