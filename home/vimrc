@@ -136,3 +136,7 @@ inoremap <right> <nop>
 nnoremap j gj
 nnoremap k gk
 
+" completion
+let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
+
