@@ -1,6 +1,15 @@
-options(repos=c("http://cran.rstudio.com/", "http://cran.stat.ucla.edu/", "http://cran.cnr.berkeley.edu"))
-options(max.print=2000)
-options(menu.graphics=FALSE)
-options(devtools.name="Jonathan Chang")
-options(devtools.author="Jonathan Chang <jonathan.chang@ucla.edu> [aut, cre]")
-options(devtools.desc.license="AGPL")
+.First <- function() {
+    options(
+        repos = c(CRAN="http://cran.rstudio.com/"),
+        menu.graphics = FALSE,
+        browserNLdisabled = TRUE,
+        devtools.name = "Jonathan Chang",
+        devtools.author = "Jonathan Chang <jonathan.chang@ucla.edu> [aut, cre]",
+        devtools.desc.license = "AGPL"
+    )
+}
+
+if(interactive()) {
+    suppressMessages(require(devtools))
+    options(max.print = 1000)
+}
