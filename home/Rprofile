@@ -1,3 +1,6 @@
 options(repos=c("http://cran.rstudio.com/", "http://cran.stat.ucla.edu/", "http://cran.cnr.berkeley.edu"))
 options(max.print=2000)
 options(menu.graphics=FALSE)
+options(devtools.name="Jonathan Chang")
+options(devtools.author="Jonathan Chang <jonathan.chang@ucla.edu> [aut, cre]")
+options(devtools.desc.license="AGPL")
