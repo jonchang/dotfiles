@@ -21,6 +21,7 @@ Plugin 'phd'
 Plugin 'twilight'
 Plugin 'tpope/vim-vividchalk'
 
+Plugin 'Vim-R-Plugin'
 call vundle#end()
 filetype plugin indent on
 
