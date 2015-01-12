@@ -16,7 +16,7 @@ smallpdf () {
         echo "Usage: smallpdf <filename>"
     else
         if [ -f "$1" ]; then
-            gs -o "${1}.small.pdf" -sDEVICE=pdfwrite -f "${1}"
+            gs -o "${1}.small.pdf" -sDEVICE=pdfwrite -dCompatibilityLevel=1.5 -f "${1}"
         else
             echo "$1 - file does not exist"
         fi
