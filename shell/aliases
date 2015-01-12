@@ -1,4 +1,5 @@
 alias R="$(/usr/bin/which R) --no-save"
+alias r="$(/usr/bin/which R) --no-save"
 
 case "$OSTYPE" in
     *darwin*)
