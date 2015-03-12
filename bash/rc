@@ -22,6 +22,15 @@ precmd() {
     set_term_title
 }
 
+preexec() {
+    case $TERM in
+        screen*)
+            # Set screen title to current command (12 char max)
+            printf '\ek%.12s\e\\' "$1"
+            ;;
+    esac
+}
+
 chpwd() {
     __git_ps1_gitdir
 }
