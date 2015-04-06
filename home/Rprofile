@@ -4,8 +4,9 @@
         menu.graphics = FALSE,
         browserNLdisabled = TRUE,
         devtools.name = "Jonathan Chang",
-        devtools.author = "Jonathan Chang <jonathan.chang@ucla.edu> [aut, cre]",
-        devtools.desc.license = "AGPL"
+        devtools.author = '"Jonathan Chang <jonathan.chang@ucla.edu> [aut, cre]"',
+        devtools.desc.license = "AGPL",
+        devtools.desc = list()
     )
 }
 
