@@ -21,6 +21,9 @@ Plugin 'phd'
 Plugin 'twilight'
 Plugin 'tpope/vim-vividchalk'
 
+" Line numbers
+Plugin 'jeffkreeftmeijer/vim-numbertoggle'
+
 call vundle#end()
 filetype plugin indent on
 
@@ -140,3 +143,8 @@ nnoremap k gk
 let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
 
+" numbertoggle
+au FocusLost * :set number
+au FocusGained * :set relativenumber
+autocmd InsertEnter * :set number
+autocmd InsertLeave * :set relativenumber
