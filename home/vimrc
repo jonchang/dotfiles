@@ -24,6 +24,8 @@ Plugin 'tpope/vim-vividchalk'
 " Line numbers
 Plugin 'jeffkreeftmeijer/vim-numbertoggle'
 
+" R-plugin
+Plugin 'Vim-R-Plugin'
 call vundle#end()
 filetype plugin indent on
 

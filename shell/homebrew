@@ -13,6 +13,9 @@ PATH=$PATH:/usr/local/share/npm/bin
 HOMEBREW_NO_EMOJI="you bet"
 export HOMEBREW_NO_EMOJI
 
+# homebrew cask options
+export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+
 # linuxbrew?
 case "$OSTYPE" in
     *linux*)

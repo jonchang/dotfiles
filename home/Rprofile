@@ -11,6 +11,9 @@
 }
 
 if(interactive()) {
-    suppressMessages(require(devtools))
+    suppressMessages(require("devtools"))
     options(max.print = 1000)
+    if (requireNamespace("fortunes", quietly = TRUE)) {
+        fortunes::fortune()
+    }
 }

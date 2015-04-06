@@ -3,6 +3,10 @@ set_term_title() {
      xterm*|rxvt*)
          local title="\033]2;$USER@${HOSTNAME%%.*}:${PWD/#$HOME/~}\a"
          ;;
+     screen*)
+         # Reset screen title to $0 ("bash")
+         local title="\ek$0\e\\"
+         ;;
      *)
          local title=""
          ;;
