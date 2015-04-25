@@ -70,6 +70,7 @@ set smarttab
 set expandtab
 set smartindent
 set wildignore=*.pyc,*.o,*.obj,*.swp
+set virtualedit=block
 
 " Fix search
 nnoremap / /\v
