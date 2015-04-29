@@ -26,6 +26,8 @@ Plugin 'jeffkreeftmeijer/vim-numbertoggle'
 
 " R-plugin
 Plugin 'Vim-R-Plugin'
+Plugin 'jalvesaq/R-vim-runtime'
+
 call vundle#end()
 filetype plugin indent on
 
