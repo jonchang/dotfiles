@@ -1,6 +1,6 @@
 .First <- function() {
     options(
-        repos = c(CRAN="http://cran.rstudio.com/"),
+        repos = c(CRAN="https://cran.rstudio.com/"),
         menu.graphics = FALSE,
         browserNLdisabled = TRUE,
         devtools.name = "Jonathan Chang",
