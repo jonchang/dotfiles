@@ -3,6 +3,11 @@
 # include .profile
 source ~/.profile
 
+if [ -e "/etc/profile.d/modules.sh" ]
+then
+    source "/etc/profile.d/modules.sh"
+fi
+
 # include bashrc too if this is an interactive shell
 [[ $- == *i* ]] && source ~/.bashrc
 
