@@ -19,3 +19,4 @@ done
 # vim stuff
 git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 vim +PluginInstall +qall
+mkdir -p ~/.vim/backup
