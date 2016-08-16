@@ -10,11 +10,13 @@ export NODE_PATH
 PATH=$PATH:/usr/local/share/npm/bin
 
 # turn off homebrew emoji
-HOMEBREW_NO_EMOJI="you bet"
-export HOMEBREW_NO_EMOJI
+export HOMEBREW_NO_EMOJI="you bet"
 
 # homebrew cask options
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+
+# homebrew developer settings
+export HOMEBREW_DEVELOPER=1
 
 # linuxbrew?
 case "$OSTYPE" in
