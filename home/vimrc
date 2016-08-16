@@ -12,6 +12,7 @@ Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
+let g:snipMateAllowMatchingDot = 0
 
 " completion
 Plugin 'ervandew/supertab'
@@ -33,6 +34,11 @@ let vimrplugin_assign = 0
 
 " Rust
 Plugin 'rust-lang/rust.vim'
+
+" Python
+Plugin 'davidhalter/jedi-vim'
+
+let g:jedi#popup_on_dot = 0
 
 call vundle#end()
 filetype plugin indent on
