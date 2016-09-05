@@ -26,4 +26,14 @@ case "$OSTYPE" in
         ;;
 esac
 
+# add bintray keys if we are using `brew pull`
+brew() {
+    if [[ $@ == "pull" ]]; then
+        # start a subshell with these settings
+        (source $HOME/.bintray_settings; command brew pull $@)
+    else
+        command brew $@
+    fi
+}
+
 export PATH
