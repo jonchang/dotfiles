@@ -28,9 +28,9 @@ esac
 
 # add bintray keys if we are using `brew pull`
 brew() {
-    if [[ $@ == "pull" ]]; then
+    if [[ $1 == "pull" ]]; then
         # start a subshell with these settings
-        (source $HOME/.bintray_settings; command brew pull $@)
+        (source $HOME/.bintray_settings; command brew $@)
     else
         command brew $@
     fi
