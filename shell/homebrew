@@ -26,6 +26,16 @@ case "$OSTYPE" in
         ;;
 esac
 
+alias linuxbrew="~/.linuxbrew/bin/brew"
+
+linuxbrew() {
+    if [[ $1 == "pull" ]]; then
+        (source $HOME/bintray_settings; command linuxbrew $@)
+    else
+        command linuxbrew $@
+    fi
+}
+
 # add bintray keys if we are using `brew pull`
 brew() {
     if [[ $1 == "pull"* ]]; then
