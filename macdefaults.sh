@@ -11,10 +11,10 @@ printf "Keyboard - Enable keyboard access for all controls\n"
 defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 
 printf "Keyboard - Set a fast keyboard repeat rate\n"
-defaults write NSGlobalDomain KeyRepeat -int 2
+defaults write NSGlobalDomain KeyRepeat -int 3
 
-printf "Keyboard - Set a fast initial key repeat rate\n"
-defaults write NSGlobalDomain InitialKeyRepeat -int 15
+printf "Keyboard - Set a short pause for repeat\n"
+defaults write NSGlobalDomain KeyRepeat -int 20
 
 printf "iCloud - Save to disk by default\n"
 defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
