@@ -38,3 +38,13 @@ defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
 printf "Printer - Automatically quit printer app once the print jobs complete\n"
 defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
 
+xscreensaver_hacks=( AntSpotlight Apple2 BSOD BlitSpin BoxFit Bumps Carousel Distort FlipFlop FlipScreen3D GFlux GLSlideshow Gleidescope Jigsaw Penetrate Photopile Ripples RotZoomer SlideScreen Slip Spotlight Tessellimage Twang XAnalogTV Zoom )
+
+printf "xscreensaver - Never use Photo Library or Desktop Images\n"
+for i in "${xscreensaver_hacks[@]}"
+do
+    printf " => ${i}...\n"
+    defaults write org.jwz.xscreensaver.${i} grabDesktopImages -int 0
+    defaults write org.jwz.xscreensaver.${i} chooseRandomImages -int 1
+    defaults write org.jwz.xscreensaver.${i} imageDirectory -string "/Library/Screen Savers/Default Collections"
+done
