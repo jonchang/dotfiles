@@ -41,6 +41,10 @@ defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
 printf "Printer - Automatically quit printer app once the print jobs complete\n"
 defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
 
+printf "TeXShop - Add RMarkdown extensions"
+defaults write TeXShop OtherTeXExtensions -array-add "Rmd"
+defaults write TeXShop OtherTeXExtensions -array-add "rmd"
+
 xscreensaver_hacks=( AntSpotlight Apple2 BSOD BlitSpin BoxFit Bumps Carousel Distort FlipFlop FlipScreen3D GFlux GLSlideshow Gleidescope Jigsaw Penetrate Photopile Ripples RotZoomer SlideScreen Slip Spotlight Tessellimage Twang XAnalogTV Zoom )
 
 printf "xscreensaver - Never use Photo Library or Desktop Images\n"
