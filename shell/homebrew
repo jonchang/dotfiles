@@ -21,7 +21,7 @@ export HOMEBREW_DEVELOPER=1
 # linuxbrew?
 case "$OSTYPE" in
     *linux*)
-        export PATH="$HOME/.linuxbrew/bin:$PATH"
+        export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
         #export LD_LIBRARY_PATH="$HOME/.linuxbrew/lib:$LD_LIBRARY_PATH"
         ;;
 esac
@@ -38,7 +38,7 @@ linuxbrew() {
 
 # add bintray keys if we are using `brew pull`
 brew() {
-    if [[ $1 == "pull"* ]]; then
+    if [[ $1 == "pull"* ]] || [[ $1 == "test-bot-docker" ]]; then
         # start a subshell with these settings
         (source $HOME/.bintray_settings; command brew $@)
     else
