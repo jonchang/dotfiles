@@ -1,5 +1,9 @@
+# load homebrew paths first
+. ~/.dotfiles/shell/homebrew
+
 # load all shell files
 for file in ~/.dotfiles/shell/*; do
+    [[ $file == */homebrew ]] && continue
     [[ -x $file ]] && . $file
 done
 
