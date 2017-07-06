@@ -1,5 +1,17 @@
-alias R="$(/usr/bin/which R) --no-save"
-alias r="$(/usr/bin/which R) --no-save"
+if /usr/bin/which R > /dev/null; then
+    alias R="R --no-save"
+    alias r="R --no-save"
+fi
+
+if /usr/bin/which nvim > /dev/null; then
+    alias vim=nvim
+    alias vimdiff="nvim -d"
+    alias view="nvim -R"
+    alias ex="nvim -e"
+    alias exim="nvim -E"
+    alias rvim="nvim -Z"
+    alias rview="nvim -RZ"
+fi
 
 case "$OSTYPE" in
     *darwin*)
