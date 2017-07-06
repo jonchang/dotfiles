@@ -1,9 +1,9 @@
-if /usr/bin/which R > /dev/null; then
+if /usr/bin/which R > /dev/null 2>&1; then
     alias R="R --no-save"
     alias r="R --no-save"
 fi
 
-if /usr/bin/which nvim > /dev/null; then
+if /usr/bin/which nvim > /dev/null 2>&1; then
     alias vim=nvim
     alias vimdiff="nvim -d"
     alias view="nvim -R"
