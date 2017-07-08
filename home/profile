@@ -6,3 +6,5 @@
 export PATH
 
 # vim: ft=sh
+
+export PATH="$HOME/.cargo/bin:$PATH"
