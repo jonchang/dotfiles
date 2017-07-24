@@ -9,16 +9,13 @@ NODE_PATH=/usr/local/lib/node
 export NODE_PATH
 PATH=$PATH:/usr/local/share/npm/bin
 
-# turn off homebrew emoji
-export HOMEBREW_NO_EMOJI="you bet"
-
-# homebrew cask options
+# Homebrew settings
+export HOMEBREW_NO_EMOJI=1
+export HOMEBREW_DEVELOPER=1
+export HOMEBREW_NO_AUTO_UPDATE=1
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
-# homebrew developer settings
-export HOMEBREW_DEVELOPER=1
-
-# linuxbrew?
+# Linuxbrew settings
 case "$OSTYPE" in
     *linux*)
         export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
@@ -28,14 +25,6 @@ esac
 
 alias linuxbrew="~/.linuxbrew/bin/brew"
 
-linuxbrew() {
-    if [[ $1 == "pull" ]]; then
-        (source $HOME/bintray_settings; command linuxbrew $@)
-    else
-        command linuxbrew $@
-    fi
-}
-
 # add bintray keys if we are using `brew pull`
 brew() {
     if [[ $1 == "pull"* ]] || [[ $1 == "test-bot-docker" ]]; then
@@ -43,6 +32,14 @@ brew() {
         (source $HOME/.bintray_settings; command brew $@)
     else
         command brew $@
+    fi
+}
+
+linuxbrew() {
+    if [[ $1 == "pull" ]]; then
+        (source $HOME/bintray_settings; command linuxbrew $@)
+    else
+        command linuxbrew $@
     fi
 }
 
