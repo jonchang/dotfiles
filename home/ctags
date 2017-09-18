@@ -1,0 +1,5 @@
+--langdef=R
+--langmap=R:.R.r
+--regex-R=/^[ \t]*"?([.A-Za-z][.A-Za-z0-9_]*)"?[ \t]*<-[ \t]function[ \t]*\(/\1/f,Functions/
+--regex-R=/^"?([.A-Za-z][.A-Za-z0-9_]*)"?[ \t]*<-[ \t][^\(]+$/\1/g,GlobalVars/
+--regex-R=/[ \t]"?([.A-Za-z][.A-Za-z0-9_]*)"?[ \t]*<-[ \t][^\(]+$/\1/v,FunctionVariables/
