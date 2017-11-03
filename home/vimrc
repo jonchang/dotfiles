@@ -1,5 +1,7 @@
 set nocompatible
 
+set noerrorbells visualbell t_vb=
+
 " Plugins with vundle
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
