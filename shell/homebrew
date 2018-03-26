@@ -35,6 +35,8 @@ brew() {
     fi
 }
 
+alias linuxbrew-pull='brew pull --bottle --bintray-org=linuxbrew --test-bot-user=LinuxbrewTestBot'
+
 linuxbrew() {
     if [[ $1 == "pull" ]]; then
         (source $HOME/bintray_settings; command linuxbrew $@)
