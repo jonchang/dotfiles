@@ -61,5 +61,12 @@ pdf2svg() {
     fi
 }
 
+# Convert a DOI to bibtex.
+bib() {
+    for i do
+        curl -LH "Accept: text/bibliography; style=bibtex" "http://doi.org/$i" | sed 's/^ *//'
+    done
+}
+
 
 # vim: ft=sh
