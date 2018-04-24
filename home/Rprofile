@@ -12,7 +12,7 @@
 
 if(interactive()) {
     suppressMessages(require("devtools"))
-    options(max.print = 1000)
+    options(max.print = 1000, setWidthOnResize = TRUE)
     if (requireNamespace("fortunes", quietly = TRUE)) {
         fortunes::fortune()
     }
