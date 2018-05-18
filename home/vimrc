@@ -40,6 +40,9 @@ Plugin 'rust-lang/rust.vim'
 " Python
 Plugin 'davidhalter/jedi-vim'
 
+" Conflict markers
+Plugin 'rhysd/conflict-marker.vim'
+
 let g:jedi#popup_on_dot = 0
 
 call vundle#end()
