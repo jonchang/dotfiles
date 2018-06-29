@@ -28,7 +28,7 @@ Plugin 'tpope/vim-vividchalk'
 Plugin 'jeffkreeftmeijer/vim-numbertoggle'
 
 " R-plugin
-Plugin 'Vim-R-Plugin'
+Plugin 'jalvesaq/Nvim-R'
 Plugin 'jalvesaq/R-vim-runtime'
 
 " Let me type underscores!!
