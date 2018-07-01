@@ -13,7 +13,6 @@ PATH=$PATH:/usr/local/share/npm/bin
 export HOMEBREW_NO_EMOJI=1
 export HOMEBREW_DEVELOPER=1
 export HOMEBREW_AUTO_UPDATE_SECS=43200 # 12 hours
-export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
 # Linuxbrew settings
 case "$OSTYPE" in
@@ -27,7 +26,7 @@ alias linuxbrew="~/.linuxbrew/bin/brew"
 
 # add bintray keys if we are using `brew pull`
 brew() {
-    if [[ $1 == "pull"* ]] || [[ $1 == "test-bot-docker" ]]; then
+    if [[ $1 == "pull"* ]] || [[ $1 == "test-bot-docker" ]] || [[ $1 == "bump-formula-pr" ]] ; then
         # start a subshell with these settings
         (source $HOME/.bintray_settings; command brew $@)
     else
