@@ -14,7 +14,7 @@ printf "Keyboard - Set a fast keyboard repeat rate\n"
 defaults write NSGlobalDomain KeyRepeat -int 2
 
 printf "Keyboard - Set a short pause for repeat\n"
-defaults write NSGlobalDomain InitialKeyRepeat -int 10
+defaults write NSGlobalDomain InitialKeyRepeat -int 15
 
 printf "iCloud - Save to disk by default\n"
 defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
