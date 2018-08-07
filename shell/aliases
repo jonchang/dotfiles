@@ -68,5 +68,12 @@ bib() {
     done
 }
 
+# Convert a DOI to text
+doi() {
+    for i do
+        curl -LH "Accept: text/bibliography" "http://doi.org/$i" | sed 's/^ *//'
+    done
+}
+
 
 # vim: ft=sh
