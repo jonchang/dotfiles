@@ -34,7 +34,7 @@ brew() {
     fi
 }
 
-alias linuxbrew-pull='brew pull --bottle --bintray-org=linuxbrew --test-bot-user=LinuxbrewTestBot'
+alias linuxbrew-pull='HOMEBREW_BOTTLE_DOMAIN=https://linuxbrew.bintray.com linuxbrew pull --bottle --bintray-org=linuxbrew --test-bot-user=LinuxbrewTestBot'
 
 linuxbrew() {
     if [[ $1 == "pull" ]]; then
