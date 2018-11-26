@@ -17,12 +17,9 @@ export HOMEBREW_AUTO_UPDATE_SECS=43200 # 12 hours
 # Linuxbrew settings
 case "$OSTYPE" in
     *linux*)
-        export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
-        #export LD_LIBRARY_PATH="$HOME/.linuxbrew/lib:$LD_LIBRARY_PATH"
+        export PATH="$USER/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/bin:$PATH"
         ;;
 esac
-
-alias linuxbrew="~/.linuxbrew/bin/brew"
 
 # add bintray keys if we are using `brew pull`
 brew() {
@@ -35,13 +32,5 @@ brew() {
 }
 
 alias linuxbrew-pull='HOMEBREW_BOTTLE_DOMAIN=https://linuxbrew.bintray.com brew pull --bottle --bintray-org=linuxbrew --test-bot-user=LinuxbrewTestBot'
-
-linuxbrew() {
-    if [[ $1 == "pull" ]]; then
-        (source $HOME/bintray_settings; command linuxbrew $@)
-    else
-        command linuxbrew $@
-    fi
-}
 
 export PATH
