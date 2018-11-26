@@ -17,7 +17,7 @@ export HOMEBREW_AUTO_UPDATE_SECS=43200 # 12 hours
 # Linuxbrew settings
 case "$OSTYPE" in
     *linux*)
-        export PATH="$USER/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/bin:$PATH"
+        export PATH="$HOME/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/bin:$PATH"
         ;;
 esac
 
