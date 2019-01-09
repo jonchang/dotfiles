@@ -3,6 +3,10 @@ PATH=/usr/local/bin:/usr/local/sbin:$PATH
 
 # ruby path
 PATH=/usr/local/opt/ruby/bin:$PATH
+gempath=$(gem environment gemdir 2> /dev/null)/bin
+if [ $? -eq 0 ]; then
+    PATH=$gempath:$PATH
+fi
 
 # node.js path
 NODE_PATH=/usr/local/lib/node
