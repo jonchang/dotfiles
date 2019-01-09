@@ -12,13 +12,13 @@ PATH=$PATH:/usr/local/share/npm/bin
 # Homebrew settings
 export HOMEBREW_NO_EMOJI=1
 export HOMEBREW_DEVELOPER=1
-export HOMEBREW_AUTO_UPDATE_SECS=43200 # 12 hours
+export HOMEBREW_AUTO_UPDATE_SECS=3600 # 1 hour
+export HOMEBREW_INSTALL_CLEANUP=1
 
 # Linuxbrew settings
 case "$OSTYPE" in
     *linux*)
         export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
-        #export LD_LIBRARY_PATH="$HOME/.linuxbrew/lib:$LD_LIBRARY_PATH"
         ;;
 esac
 
