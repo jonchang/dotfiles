@@ -17,7 +17,6 @@ PATH=$PATH:/usr/local/share/npm/bin
 export HOMEBREW_NO_EMOJI=1
 export HOMEBREW_DEVELOPER=1
 export HOMEBREW_AUTO_UPDATE_SECS=3600 # 1 hour
-export HOMEBREW_INSTALL_CLEANUP=1
 
 # Linuxbrew settings
 case "$OSTYPE" in
