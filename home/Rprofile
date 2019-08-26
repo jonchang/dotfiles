@@ -13,6 +13,7 @@
 if(interactive()) {
     suppressMessages(require(devtools))
     suppressMessages(require(usethis))
+    suppressWarnings(suppressMessages(requireNamespace("tidyverse")))
     options(max.print = 1000, setWidthOnResize = TRUE)
     if (requireNamespace("fortunes", quietly = TRUE)) {
         fortunes::fortune()
