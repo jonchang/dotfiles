@@ -1,6 +1,6 @@
 # rust
 if [ -f ~/.cargo/env ]; then
-  source $HOME/.cargo/env
+  . "$HOME/.cargo/env"
 fi
 
 # pipx

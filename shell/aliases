@@ -1,9 +1,9 @@
-if /usr/bin/which R > /dev/null 2>&1; then
+if command -v R > /dev/null 2>&1; then
     alias R="R --no-save"
     alias r="R --no-save"
 fi
 
-if /usr/bin/which nvim > /dev/null 2>&1; then
+if command -v nvim > /dev/null 2>&1; then
     alias vim=nvim
     alias vimdiff="nvim -d"
     alias view="nvim -R"
@@ -13,6 +13,8 @@ if /usr/bin/which nvim > /dev/null 2>&1; then
     alias rview="nvim -RZ"
 fi
 
+# bash/zsh-ism, but that's OK
+# shellcheck disable=SC2039
 case "$OSTYPE" in
     *darwin*)
         alias top="top -o cpu"
@@ -40,7 +42,7 @@ svg2pdf() {
         echo "Usage: svg2pdf <filename>"
     else
         if [ -f "$1" ]; then
-            oname=`basename "$1" .svg`
+            oname=$(basename "$1" .svg)
             inkscape "$PWD/$1" "-A=$PWD/${oname}.pdf" --without-gui
         else
             echo "$1 - file does not exist"
@@ -53,7 +55,7 @@ pdf2svg() {
         echo "Usage: pdf2svg <filename>"
     else
         if [ -f "$1" ]; then
-            oname=`basename "$1" .pdf`
+            oname=$(basename "$1" .pdf)
             inkscape "$PWD/$1" "-l=$PWD/${oname}.svg" --without-gui
         else
             echo "$1 - file does not exist"
