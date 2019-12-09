@@ -12,4 +12,7 @@ __git_files () {
     _wanted files expl 'local files' _files
 }
 
+# Case insensitive completions
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+
 # vim: ft=zsh
