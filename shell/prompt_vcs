@@ -49,7 +49,7 @@ prompt_vcs_status() {
         [[ "$GIT_PS1_STATUS" == *u* ]] && vcs_status+="${Y}≠"
         [[ "$GIT_PS1_STATUS" == *s* ]] && vcs_status+="${R}±"
         [[ "$GIT_PS1_STATUS" == *n* ]] && vcs_status+="${BB}∅"
-        [[ -n "$vcs_status" ]] && prompt_segment black white "${vcs_status}"
+        [[ -n "$vcs_status" ]] && prompt_segment default white "${vcs_status}"
     fi
 }
 
