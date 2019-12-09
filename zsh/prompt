@@ -1,0 +1,175 @@
+source "$DOTFILES_SHELL_DIR/prompt_segments"
+source "$DOTFILES_ZSH_DIR/prompt_segments"
+source "$DOTFILES_SHELL_DIR/prompt_vcs"
+
+prompt_host() {
+    local bg='black'
+    local fg='white'
+
+    if [[ $UID -eq 0 ]]; then
+        bg='red'
+    fi
+
+    if [[ -n $SSH_CLIENT ]]; then
+        fg='yellow'
+    fi
+
+    prompt_segment $bg $fg '%n@%m'
+}
+
+prompt_dir() {
+    prompt_segment green white '%~'
+}
+
+
+prompt_segment_test() {
+    prompt_segment red white
+    prompt_segment default white
+    prompt_segment blue white
+    prompt_segment default white
+    prompt_segment green white
+    prompt_segment default white
+    prompt_segment cyan white
+    prompt_segment default white
+    prompt_segment yellow white
+    prompt_segment default white
+    prompt_segment white black
+    prompt_segment default white
+    prompt_segment black white
+    prompt_segment default white
+    prompt_segment red white
+    prompt_segment default white
+    prompt_segment
+    CURRENT_BG='NONE'
+    echo
+}
+
+rprompt_segment_test() {
+    rprompt_segment
+    rprompt_segment red white
+    rprompt_segment default white
+    rprompt_segment blue white
+    rprompt_segment default white
+    rprompt_segment green white
+    rprompt_segment default white
+    rprompt_segment cyan white
+    rprompt_segment default white
+    rprompt_segment yellow white
+    rprompt_segment default white
+    rprompt_segment white black
+    rprompt_segment default white
+    rprompt_segment black white
+    rprompt_segment default white
+    rprompt_segment red white
+    rprompt_segment default white
+    CURRENT_BG='NONE'
+    echo
+}
+
+prompt_last_rc() {
+    #echo -n "%(?..%B[%?]%b)"
+    [[ $LAST_CMD_RC -ne 0 ]] && prompt_segment red white "$LAST_CMD_RC"
+}
+
+prompt_vi_mode() {
+    local mode_color mode_text
+
+    PROMPT_VI_MODE="${${KEYMAP/vicmd/NORMAL}/(main|viins)/INSERT}"
+
+    case $PROMPT_VI_MODE in
+        NORMAL)
+            mode_color='green'
+            mode_text='N'
+            ;;
+        *)
+            mode_color='blue'
+            mode_text='I'
+            ;;
+    esac
+    [[ -n $mode_color ]] && prompt_segment $mode_color white $mode_text
+}
+
+function zle-line-init {
+    set_prompt
+    zle reset-prompt
+}
+function zle-keymap-select {
+    set_prompt
+    zle reset-prompt
+}
+zle -N zle-line-init
+zle -N zle-keymap-select
+
+prompt_build() {
+    RPROMPT_SEGMENTS=''
+    prompt_setup_segments
+    CURRENT_BG='NONE'
+    prompt_host
+    prompt_vcs_repo || prompt_dir
+    prompt_end
+    echo -n ' '
+}
+
+rprompt_build() {
+    RPROMPT_SEGMENT=1
+    prompt_setup_segments
+    CURRENT_BG='NONE'
+    prompt_last_rc
+    prompt_vcs_status
+    prompt_vcs_action
+    rprompt_end
+}
+
+prompt_opts=(cr percent)
+
+function contains() {
+  [[ "$2" == *$1* ]]
+}
+
+set_prompt() {
+    __git_ps1_vars
+
+    local buffer=""
+
+    if [[ -n $SSH_CLIENT ]]; then
+        buffer="${buffer}${HOST} "
+    fi
+
+    if [[ -n "$VIRTUAL_ENV" ]]; then
+        buffer="${buffer}%F{yellow}${VIRTUAL_ENV##*/} "
+    fi
+
+    local pwd
+    if [[ $PWD == $HOME ]]; then
+       pwd="~"
+    else
+      pwd="${PWD##*/}"
+    fi
+    buffer="${buffer}%F{green}${pwd}"
+
+    # add git prompt info
+    if [[ -n "$GIT_PS1_STATUS" ]]; then
+        buffer="${buffer} %F{blue}$GIT_PS1_BRANCH"
+
+        vcs_status=""
+        contains h "$GIT_PS1_STATUS" && vcs_status="$vcs_status""⇱"
+        contains t "$GIT_PS1_STATUS" && vcs_status="$vcs_status""!"
+        contains u "$GIT_PS1_STATUS" && vcs_status="$vcs_status""≠"
+        contains s "$GIT_PS1_STATUS" && vcs_status="$vcs_status""±"
+        contains n "$GIT_PS1_STATUS" && vcs_status="$vcs_status""∅"
+        [[ -n "$vcs_status" ]] && buffer="${buffer} %F{red}$vcs_status"
+
+        action=""
+        contains R "$GIT_PS1_STATUS" && action="$action rebase"
+        contains i "$GIT_PS1_STATUS" && action="$action-i"
+        contains A "$GIT_PS1_STATUS" && action="$action apply"
+        contains M "$GIT_PS1_STATUS" && action="$action merge"
+        contains B "$GIT_PS1_STATUS" && action="$action bisect"
+        [[ -n "$action" ]] && buffer="${buffer} %F{yellow}$action"
+    fi
+
+    buffer="${buffer}%f%% "
+    PROMPT="${buffer}"
+}
+
+# vim: ft=zsh

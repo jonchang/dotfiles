@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 [ $(pwd) = "$HOME/.dotfiles" ] || ln -sfn "$(pwd)" "$HOME/.dotfiles"
 

@@ -1,0 +1,9 @@
+# zprofile, called for login shells
+
+emulate sh
+source ~/.profile
+emulate zsh
+
+# zshrc will be called automatically for interactive shells
+
+# vim: ft=zsh

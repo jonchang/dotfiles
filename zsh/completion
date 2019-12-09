@@ -1,0 +1,15 @@
+# Brew completions
+if type brew &>/dev/null; then
+  FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+fi
+
+# Use modern completion system
+autoload -Uz compinit
+compinit
+
+# git completion speed boost
+__git_files () {
+    _wanted files expl 'local files' _files
+}
+
+# vim: ft=zsh

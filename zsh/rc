@@ -1,0 +1,37 @@
+# zshrc, called for interactive shells
+
+[[ -z "$DOTFILES_ROOT_DIR" ]] && source "$HOME/.dotfilesrc"
+
+source $DOTFILES_SHELL_DIR/aliases
+source $DOTFILES_ZSH_DIR/term_title
+set_term_title # call it right now
+
+source $DOTFILES_ZSH_DIR/history
+source $DOTFILES_ZSH_DIR/keybindings
+source $DOTFILES_ZSH_DIR/completion
+source $DOTFILES_ZSH_DIR/prompt
+
+unsetopt BEEP
+
+source $DOTFILES_SHELL_DIR/git_prompt_info
+GIT_PS1_SHOWDIRTYSTATE=1
+GIT_PS1_SHOWSTASHSTATE=1
+GIT_PS1_SHOWUNTRACKEDFILES=1
+
+precmd() {
+    LAST_CMD_RC=$?
+    psvar=()
+    set_prompt
+    set_term_title
+}
+
+preexec() {
+    set_term_title
+}
+
+chpwd() {
+    __git_ps1_gitdir
+}
+chpwd
+
+# vim: ft=zsh
