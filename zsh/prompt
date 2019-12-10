@@ -4,16 +4,8 @@ source "$DOTFILES_ZSH_DIR/prompt_segments"
 source "$DOTFILES_SHELL_DIR/prompt_vcs"
 
 prompt_host() {
-    local bg='default'
-    local fg='white'
-
-    if [[ $UID -eq 0 ]]; then
-        bg='red'
-    fi
-
     if [[ -n $SSH_CLIENT ]]; then
-        fg='yellow'
-        prompt_segment $bg $fg '%n@%m'
+        echo -n "%{%F{yellow}%}%n@%m %{%F{default}%}"
     fi
 }
 
