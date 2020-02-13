@@ -1,1 +1,4 @@
-hub
+# ignore everything
+*
+# except nvim
+!nvim
