@@ -7,3 +7,4 @@ OPTIONS=catname:Hamburglar,dogname:Ronald,fruit:cheese pizza
 OPTIONS=scores:10 top/3 around/own
 
 OPTIONS=!cmdassist,!help,!legacy,!news,suppress_alert:3.4.3
+OPTIONS=windowtype:curses,perm_invent
