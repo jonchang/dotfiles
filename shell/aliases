@@ -43,7 +43,7 @@ svg2pdf() {
     else
         if [ -f "$1" ]; then
             oname=$(basename "$1" .svg)
-            inkscape "$PWD/$1" "-A=$PWD/${oname}.pdf" --without-gui
+            rsvg-convert "$PWD/$1" -f pdf -o "$PWD/${oname}.pdf"
         else
             echo "$1 - file does not exist"
         fi
