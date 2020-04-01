@@ -63,6 +63,26 @@ pdf2svg() {
     fi
 }
 
+# Convert a video to Quicktime-compatible format
+convert2quicktime() {
+    input="$1"
+    if [ -z "$input" ]; then
+        echo "Converts a video to QuickTime-compatible format."
+        echo "Usage: convert2quicktime <file> <ffmpeg_options>"
+        return
+    fi
+
+    shift
+
+    if ! [ -f "$input" ]; then
+        echo "$input - file does not exist"
+        return
+    fi
+
+    echo "$output"
+    ffmpeg -i "$input" -c:v libx265 -crf 22 -tag:v hvc1 -c:a aac -ac 2 -b:a 128k $@ "${input}.mp4"
+}
+
 # Convert a DOI to bibtex.
 bib() {
     for i do
