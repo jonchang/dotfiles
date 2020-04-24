@@ -80,7 +80,7 @@ convert2quicktime() {
     fi
 
     echo "$output"
-    ffmpeg -i "$input" -c:v libx265 -crf 22 -tag:v hvc1 -c:a aac -ac 2 -b:a 128k $@ "${input}.mp4"
+    ffmpeg -i "$input" -map 0 -c:v libx265 -crf 22 -tag:v hvc1  -c:a aac -ac 2 -b:a 128k -c:s mov_text $@ "${input}.mp4"
 }
 
 # Convert a DOI to bibtex.
