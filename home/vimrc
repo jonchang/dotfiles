@@ -145,6 +145,7 @@ set undofile
 set undodir^=~/.vim/undo//
 
 au! BufRead,BufNewFile *.json setfiletype json
+
 autocmd FileType python call <SID>pystuff()
 function <SID>pystuff()
     set foldmethod=indent
@@ -153,6 +154,8 @@ function <SID>pystuff()
 endfunction
 
 autocmd FileType make set noexpandtab
+
+autocmd FileType markdown setlocal linebreak spell
 
 set listchars=tab:▸\ ,trail:~
 set list
