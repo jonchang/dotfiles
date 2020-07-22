@@ -14,5 +14,7 @@ __git_files () {
 
 # Case insensitive completions
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+# Cache completions
+zstyle ':completion:*' use-cache true
 
 # vim: ft=zsh
