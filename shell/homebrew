@@ -16,7 +16,7 @@ PATH=$PATH:/usr/local/share/npm/bin
 # Homebrew settings
 export HOMEBREW_NO_EMOJI=1
 export HOMEBREW_DEVELOPER=1
-export HOMEBREW_AUTO_UPDATE_SECS=3600 # 1 hour
+export HOMEBREW_CLEANUP_MAX_AGE_DAYS=14 # be more aggressive with cleaning up
 
 # Linuxbrew settings
 case "$OSTYPE" in
@@ -27,7 +27,7 @@ esac
 
 # add bintray keys if we are using `brew pull`
 brew() {
-    if [[ $1 == "pull"* ]] || [[ $1 == "test-bot*" ]] || [[ $1 == "bump-formula-pr" ]] ; then
+    if [[ $1 == "pr-"* ]] || [[ $1 == "test-bot*" ]] || [[ $1 == "bump-formula-pr" ]] ; then
         # start a subshell with these settings
         (. "$HOME/.bintray_settings"; command brew "$@")
     else
