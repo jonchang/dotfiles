@@ -9,7 +9,7 @@
     whitespace = red reverse
 [user]
     name = Jonathan Chang
-    email = jchang641@gmail.com
+    email = me@jonathanchang.org
 [push]
     default = simple
 [filter "lfs"]
