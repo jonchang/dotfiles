@@ -153,9 +153,14 @@ function <SID>pystuff()
     set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class,with
 endfunction
 
+" Force tabs for Makefiles
 autocmd FileType make set noexpandtab
 
+" Auto spellcheck and line wrapping for markdown
 autocmd FileType markdown setlocal linebreak spell
+
+" Fix YAML indenting
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 set listchars=tab:▸\ ,trail:~
 set list
