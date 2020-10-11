@@ -17,6 +17,8 @@ PATH=$PATH:/usr/local/share/npm/bin
 export HOMEBREW_NO_EMOJI=1
 export HOMEBREW_DEVELOPER=1
 export HOMEBREW_CLEANUP_MAX_AGE_DAYS=14 # be more aggressive with cleaning up
+export HOMEBREW_SORBET_RUNTIME=1
+export HOMEBREW_GIT_FILTER_TREE_ZERO=1
 
 # Linuxbrew settings
 case "$OSTYPE" in
@@ -35,6 +37,5 @@ brew() {
     fi
 }
 
-alias linuxbrew-pull='HOMEBREW_BOTTLE_DOMAIN=https://linuxbrew.bintray.com brew pull --bottle --bintray-org=linuxbrew --test-bot-user=LinuxbrewTestBot'
 
 export PATH
