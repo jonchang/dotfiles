@@ -9,16 +9,6 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 Plugin 'pangloss/vim-javascript'
 
-" Snipmate
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
-Plugin 'garbas/vim-snipmate'
-Plugin 'honza/vim-snippets'
-let g:snipMateAllowMatchingDot = 0
-
-" completion
-Plugin 'ervandew/supertab'
-
 " Colors
 Plugin 'phd'
 Plugin 'twilight'
@@ -37,11 +27,38 @@ Plugin 'rust-lang/rust.vim'
 
 " Python
 Plugin 'davidhalter/jedi-vim'
+let g:jedi#popup_on_dot = 0
 
 " Conflict markers
 Plugin 'rhysd/conflict-marker.vim'
 
-let g:jedi#popup_on_dot = 0
+" Completions
+Plugin 'prabirshrestha/asyncomplete.vim'
+Plugin 'prabirshrestha/vim-lsp'
+Plugin 'prabirshrestha/asyncomplete-lsp.vim'
+Plugin 'dense-analysis/ale'
+
+" Use tab for completion
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr>    pumvisible() ? asyncomplete#close_popup() : "\<cr>"
+let g:asyncomplete_auto_popup = 0
+imap <c-space> <Plug>(asyncomplete_force_refresh)
+
+function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+" Enable preview windows
+inoremap <silent><expr> <TAB>
+  \ pumvisible() ? "\<C-n>" :
+  \ <SID>check_back_space() ? "\<TAB>" :
+  \ asyncomplete#force_refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+set completeopt=menuone,noinsert,noselect,preview
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
 call vundle#end()
 filetype plugin indent on
@@ -186,7 +203,3 @@ inoremap <left> <nop>
 inoremap <right> <nop>
 nnoremap j gj
 nnoremap k gk
-
-" completion
-let g:SuperTabDefaultCompletionType = "context"
-let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
