@@ -1,24 +1,23 @@
-# local path
-PATH=/usr/local/bin:/usr/local/sbin:$PATH
+HOMEBREW_PREFIX=$(brew --prefix)
+# Add Homebrew's sbin
+PATH=${HOMEBREW_PREFIX}/sbin:$PATH
 
-# ruby path
-PATH=/usr/local/opt/ruby/bin:$PATH
+# Ensure Ruby gems and brewed Ruby can come first, over system Ruby
+PATH=${HOMEBREW_PREFIX}/opt/ruby/bin:$PATH
 gempath=$(gem environment gemdir 2> /dev/null)/bin
 if [ $? -eq 0 ]; then
     PATH=$gempath:$PATH
 fi
 
 # node.js path
-NODE_PATH=/usr/local/lib/node
+NODE_PATH=${HOMEBREW_PREFIX}/lib/node
 export NODE_PATH
 PATH=$PATH:/usr/local/share/npm/bin
 
 # Homebrew settings
 export HOMEBREW_NO_EMOJI=1
 export HOMEBREW_DEVELOPER=1
-export HOMEBREW_CLEANUP_MAX_AGE_DAYS=14 # be more aggressive with cleaning up
 export HOMEBREW_SORBET_RUNTIME=1
-export HOMEBREW_GIT_FILTER_TREE_ZERO=1
 
 # Linuxbrew settings
 case "$OSTYPE" in
@@ -36,6 +35,5 @@ brew() {
         command brew "$@"
     fi
 }
-
 
 export PATH
