@@ -45,13 +45,5 @@ printf "TeXShop - Add RMarkdown extensions"
 defaults write TeXShop OtherTeXExtensions -array-add "Rmd"
 defaults write TeXShop OtherTeXExtensions -array-add "rmd"
 
-xscreensaver_hacks=( AntSpotlight Apple2 BSOD BlitSpin BoxFit Bumps Carousel Distort FlipFlop FlipScreen3D GFlux GLSlideshow Gleidescope Jigsaw Penetrate Photopile Ripples RotZoomer SlideScreen Slip Spotlight Tessellimage Twang XAnalogTV Zoom )
-
-printf "xscreensaver - Never use Photo Library or Desktop Images\n"
-for i in "${xscreensaver_hacks[@]}"
-do
-    printf " => ${i}...\n"
-    defaults write org.jwz.xscreensaver.${i} grabDesktopImages -int 0
-    defaults write org.jwz.xscreensaver.${i} chooseRandomImages -int 1
-    defaults write org.jwz.xscreensaver.${i} imageDirectory -string "/Library/Screen Savers/Default Collections"
-done
+printf "Mouse - Disable acceleration"
+defaults write -g com.apple.mouse.scaling -1
