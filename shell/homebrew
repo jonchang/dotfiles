@@ -1,3 +1,7 @@
+if test -f "/opt/homebrew/bin/brew"; then
+    PATH=/opt/homebrew/bin/:$PATH
+fi
+
 HOMEBREW_PREFIX=$(brew --prefix)
 # Add Homebrew's sbin
 PATH=${HOMEBREW_PREFIX}/sbin:$PATH
