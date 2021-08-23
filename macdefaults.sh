@@ -44,6 +44,3 @@ defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
 printf "TeXShop - Add RMarkdown extensions"
 defaults write TeXShop OtherTeXExtensions -array-add "Rmd"
 defaults write TeXShop OtherTeXExtensions -array-add "rmd"
-
-printf "Mouse - Disable acceleration"
-defaults write -g com.apple.mouse.scaling -1
