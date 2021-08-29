@@ -1,6 +1,16 @@
+# ARM macOS
 if test -f "/opt/homebrew/bin/brew"; then
     PATH=/opt/homebrew/bin:$PATH
 fi
+
+# Homebrew on Linux
+case "$OSTYPE" in
+    *linux*)
+        PATH="$HOME/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/bin:$PATH"
+        export HOMEBREW_BOTTLE_DOMAIN="https://ghcr.io/v2/homebrew/core"
+        export HOMEBREW_CORE_GIT_REMOTE="https://github.com/Homebrew/homebrew-core"
+        ;;
+esac
 
 HOMEBREW_PREFIX=$(brew --prefix)
 # Add Homebrew's sbin
@@ -22,22 +32,5 @@ PATH=$PATH:/usr/local/share/npm/bin
 export HOMEBREW_NO_EMOJI=1
 export HOMEBREW_DEVELOPER=1
 export HOMEBREW_SORBET_RUNTIME=1
-
-# Linuxbrew settings
-case "$OSTYPE" in
-    *linux*)
-        export PATH="$HOME/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/bin:$PATH"
-        ;;
-esac
-
-# add bintray keys if we are using `brew pull`
-brew() {
-    if [[ $1 == "pr-"* ]] || [[ $1 == "test-bot*" ]] || [[ $1 == "bump-formula-pr" ]] ; then
-        # start a subshell with these settings
-        (. "$HOME/.bintray_settings"; command brew "$@")
-    else
-        command brew "$@"
-    fi
-}
 
 export PATH
