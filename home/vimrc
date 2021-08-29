@@ -32,6 +32,9 @@ let g:jedi#popup_on_dot = 0
 " Conflict markers
 Plugin 'rhysd/conflict-marker.vim'
 
+" TOML
+Plugin 'cespare/vim-toml'
+
 " Completions
 Plugin 'prabirshrestha/asyncomplete.vim'
 Plugin 'prabirshrestha/vim-lsp'
