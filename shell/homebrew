@@ -1,20 +1,16 @@
-# ARM macOS
-if test -f "/opt/homebrew/bin/brew"; then
-    PATH=/opt/homebrew/bin:$PATH
-fi
+for brew in /opt/homebrew/bin/brew /usr/local/bin/brew /home/linuxbrew/.linuxbrew/bin/brew $HOME/bin/brew; do
+    if test -f "$brew"; then
+        eval "$($brew shellenv)"
+    fi
+done
 
 # Homebrew on Linux
-case "$OSTYPE" in
-    *linux*)
-        PATH="$HOME/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/bin:$PATH"
+case "$(uname)" in
+    *Linux*)
         export HOMEBREW_BOTTLE_DOMAIN="https://ghcr.io/v2/homebrew/core"
         export HOMEBREW_CORE_GIT_REMOTE="https://github.com/Homebrew/homebrew-core"
         ;;
 esac
-
-HOMEBREW_PREFIX=$(brew --prefix)
-# Add Homebrew's sbin
-PATH=${HOMEBREW_PREFIX}/sbin:$PATH
 
 # Ensure Ruby gems and brewed Ruby can come first, over system Ruby
 PATH=${HOMEBREW_PREFIX}/opt/ruby/bin:$PATH
