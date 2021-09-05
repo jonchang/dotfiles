@@ -19,11 +19,6 @@ if [[ -z $BASH_VERSION || -z "$(type -t __gitdir)" ]]; then
     }
 fi
 
-# head that's being merged
-__git_ps1_rebase_merge_head() {
-    cat "$1/rebase-merge/head-name"
-}
-
 # describe according to GIT_PS1_DESCRIBE_STYLE
 __git_ps1_describe() {
     case "${GIT_PS1_DESCRIBE_STYLE-}" in
@@ -128,7 +123,7 @@ __git_ps1_vars() {
     branch=$(__git_ps1_branch)
 
     # evaluate action
-    [[ -d "$g/rebase-merge" ]] && rebase=1 merge=1 subject=$(__git_ps1_rebase_merge_head)
+    [[ -d "$g/rebase-merge" ]] && rebase=1 merge=1
     [[ $rebase -eq 1 && -f "$g/rebase-merge/interactive" ]] && interactive=1 merge=0
     [[ -d "$g/rebase-apply" ]] && rebase=1 apply=1
     [[ $apply  -eq 1 && -f "$g/rebase-apply/applying" ]] && rebase=0
