@@ -10,6 +10,11 @@ case "$(uname)" in
         export HOMEBREW_BOTTLE_DOMAIN="https://ghcr.io/v2/homebrew/core"
         export HOMEBREW_CORE_GIT_REMOTE="https://github.com/Homebrew/homebrew-core"
         ;;
+    *Darwin*)
+        HB_CNF_HANDLER="$(brew --repository)/Library/Taps/homebrew/homebrew-command-not-found/handler.sh"
+        if [ -f "$HB_CNF_HANDLER" ]; then
+            source "$HB_CNF_HANDLER";
+        fi
 esac
 
 # Ensure Ruby gems and brewed Ruby can come first, over system Ruby
