@@ -41,6 +41,12 @@ Plugin 'prabirshrestha/vim-lsp'
 Plugin 'prabirshrestha/asyncomplete-lsp.vim'
 Plugin 'dense-analysis/ale'
 
+" Use Black for python
+let g:ale_fixers = {}
+let g:ale_fixers.python = ['black']
+let g:ale_linters = {}
+let g:ale_linters.python = ['flake8']
+
 " Use tab for completion
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
