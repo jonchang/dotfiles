@@ -87,6 +87,7 @@ set showmode
 set scrolloff=4
 " Use desert for console vim, gvim color theme is chosen later
 colorscheme desert
+highlight Normal ctermbg=black
 
 " Ruler
 if has('cmdline_info')
