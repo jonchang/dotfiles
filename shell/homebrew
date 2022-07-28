@@ -1,6 +1,7 @@
 for brew in /opt/homebrew/bin/brew /usr/local/bin/brew /home/linuxbrew/.linuxbrew/bin/brew $HOME/bin/brew; do
     if test -f "$brew"; then
         eval "$($brew shellenv)"
+        break
     fi
 done
 
