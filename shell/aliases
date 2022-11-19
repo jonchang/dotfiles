@@ -123,6 +123,6 @@ git-commit-each() {
 # Tea related things
 alias teab="TEA_PANTRY_PATH=~/tea/pantry.core:~/tea/pantry.extra GITHUB_TOKEN=$(gh auth token) ~/tea/pantry.core/scripts/build.ts"
 alias teat="TEA_PANTRY_PATH=~/tea/pantry.core:~/tea/pantry.extra GITHUB_TOKEN=$(gh auth token) ~/tea/pantry.core/scripts/test.ts"
-alias teal="~/.tea/deno.land/v1/bin/deno run --import-map=~/tea/cli/import-map.json --unstable --allow-all ~/tea/cli/src/app.ts"
+alias teal="~/.tea/deno.land/v1/bin/deno run --import-map=$HOME/tea/cli/import-map.json --unstable --allow-all ~/tea/cli/src/app.ts"
 
 # vim: ft=sh
