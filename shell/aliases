@@ -121,8 +121,33 @@ git-commit-each() {
 }
 
 # Tea related things
-alias teab="TEA_PANTRY_PATH=~/tea/pantry.core:~/tea/pantry.extra GITHUB_TOKEN=$(gh auth token) ~/tea/pantry.core/scripts/build.ts"
-alias teat="TEA_PANTRY_PATH=~/tea/pantry.core:~/tea/pantry.extra GITHUB_TOKEN=$(gh auth token) ~/tea/pantry.core/scripts/test.ts"
+__tea_splitter() {
+  if test "$2" = "-L"; then
+    SCRIPT_NAME=$1
+    shift
+    shift
+    docker run \
+      --name tea-test-runner \
+      --rm \
+      --volume "$HOME/tea:/src" \
+      --volume "$HOME/tea/docker/tea:/opt" \
+      --volume "$HOME/tea/docker/home:/root" \
+      --volume "$HOME/tea/pantry.core:/opt/tea.xyz/var/pantry" \
+      --workdir /src \
+      --env TEA_PREFIX=/opt \
+      --env GITHUB_TOKEN="$(gh auth token)" \
+      --env TEA_PANTRY_PATH=/src/pantry.core:/src/pantry.extra \
+      ghcr.io/teaxyz/infuser:latest \
+      "/src/pantry.core/scripts/$SCRIPT_NAME" "$@"
+  else
+    TEA_PANTRY_PATH=$HOME/tea/pantry.core:$HOME/tea/pantry.extra \
+    GITHUB_TOKEN=$(gh auth token) \
+      "$HOME"/tea/pantry.core/scripts/"$@"
+  fi
+}
+
+alias teab="__tea_splitter build.ts"
+alias teat="__tea_splitter test.ts"
 alias teal="~/.tea/deno.land/v1/bin/deno run --import-map=$HOME/tea/cli/import-map.json --unstable --allow-all ~/tea/cli/src/app.ts"
 
 # vim: ft=sh
